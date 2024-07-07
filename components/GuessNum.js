@@ -1,9 +1,24 @@
 import { View, Text, TextInput, Button } from 'react-native'; 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const GuessNum = () => {
     const [guess, setGuess] = useState('')
     const [count, setCount] = useState(0)
+    const [timer, setTimer] = useState(0)
+
+    useEffect(() => {
+        let interval;
+        if (timer < 60) {
+            interval = setInterval(() => {
+                setTimer((prevTimer) => prevTimer + 1);
+            }, 1000);
+        } else {
+            alert('You are out of time!');
+            // Call the game over component here
+        }
+        return () => clearInterval(interval);
+    }, [timer]);
+        
 
     const validateInput = (userGuess) => {
         if (isNaN(userGuess)) {
@@ -20,6 +35,8 @@ const GuessNum = () => {
         }
     };
 
+    
+
   return (
     <View>
       <Text>Guess a Number Between 1 & 100</Text>
@@ -31,6 +48,9 @@ const GuessNum = () => {
         // valide the input to make sure it is a number
         onChangeText = {handleGuess}
     />
+    <Text>Attempts left: {4 - count}</Text>
+    <Text>Timer: {timer} </Text>
+
     <Button title="Use a Hint" onPress={() => alert('The number is between 1 and 100')} />
     <Button title='Submit Guess' 
         onPress={() => {

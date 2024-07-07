@@ -8,9 +8,9 @@ const Game = () => {
   return (
     <View>
       <Text>Game</Text>
-      {/* <GuessNum />
-        <Win /> */}
-        <Gameover />
+      <GuessNum />
+        {/* <Win />
+        <Gameover /> */}
     </View>
   )
 }
