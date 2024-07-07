@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 const GuessNum = () => {
     const [guess, setGuess] = useState('')
+    const [count, setCount] = useState(0)
 
     const validateInput = (userGuess) => {
         if (isNaN(userGuess)) {
@@ -31,7 +32,13 @@ const GuessNum = () => {
         onChangeText = {handleGuess}
     />
     <Button title="Use a Hint" onPress={() => alert('The number is between 1 and 100')} />
-    <Button title='Submit Guess' onPress={() => console.log("from submit")} />
+    <Button title='Submit Guess' 
+        onPress={() => {
+            console.log("from submit");
+            setCount(count + 1);
+            console.log(count);
+        }} 
+    />
     </View>
   )
 }
