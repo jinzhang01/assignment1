@@ -8,7 +8,8 @@ const GuessNum = () => {
 
     useEffect(() => {
         let interval;
-        if (timer < 60) {
+        // need to change back to 60
+        if (timer < 6000) {
             interval = setInterval(() => {
                 setTimer((prevTimer) => prevTimer + 1);
             }, 1000);

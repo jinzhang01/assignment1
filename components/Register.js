@@ -1,7 +1,8 @@
-import { View, Text, TextInput, CheckBox, Button } from 'react-native'
+import { View, Text, TextInput, CheckBox, Button, Modal, StyleSheet} from 'react-native'
 import React from 'react'
 import { useState } from 'react'
 import Checkbox from 'expo-checkbox';
+import Confirm from '../screens/Confirm';
 
 const Register = () => {
     const [text, setText] = useState('');
@@ -9,11 +10,13 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [isEmailValidate, setEmailValidate] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+
 
     // Function to handle checkbox value change and log the status
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
-        console.log(isChecked);  
+        console.log(isChecked); 
     };
 
     const checkName = () => {
@@ -36,8 +39,19 @@ const Register = () => {
         console.log(isEmailValidate);
     }
 
+    const handleConfirm = () => {
+      setModalVisible(true);
+    };
+  
+    const handleCloseModal = () => {
+      setModalVisible(false);
+    };
+
+
+  console.log("Rendering Register", { text, email, isChecked, modalVisible });
+  
   return (
-    <View>
+    <View style={styles.container}>
         {/* could add a touched state to check if the user has touched the input field */}
         <Text> name </Text>
         <TextInput  
@@ -61,30 +75,63 @@ const Register = () => {
         />
         {isEmailValidate ? null : <Text> Please enter a valid email address </Text>}
 
-        <View>
-                <Checkbox 
-                    value={isChecked}
-                    onValueChange={handleCheckboxChange}
-                />
-                <Text>I am not a robot</Text>
-            </View>
-
-            <Button 
-                title="Reset" 
-                onPress={() => {
-                    console.log('Form reset');
-                    setIsChecked(false);
-                    setText('');
-                    setEmail('');
-                  }} 
+        <View style={styles.CheckboxContainer}>
+            <Checkbox  
+                value={isChecked}
+                onValueChange={handleCheckboxChange}
             />
-       
-            <Button title="Submit" onPress={() => console.log('Form submitted')} />
+            <Text>  I am not a robot</Text>
+        </View>
 
-
-
+          {/* to build buttons style based on text <View style={styles.fixToText}> */}
+          <View style={styles.bottonContainer}>
+            <View style={styles.button}>
+                <Button 
+                    title="Reset" 
+                    onPress={() => {
+                        console.log('Form reset');
+                        setIsChecked(false);
+                        setText('');
+                        setEmail('');
+                      }} 
+                />
+            </View>
+      
+            <View style={styles.button}>
+              <Button title="Start" 
+                onPress={() => handleConfirm()} 
+                disabled={!isChecked}/>
+            </View>
+          </View>
+      <Confirm email={email} name={text} isModalVisible={modalVisible} onClose={handleCloseModal} />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    // alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    backgroundColor: 'lightblue',
+    color: 'black',
+    fontSize: 20,
+    width: "60%",
+    margin: 10
+  },
+  bottonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "50%"
+  },
+  CheckboxContainer: {
+    flexDirection: "row",
+    justifyContent: "left",
+    margin: 10
+  },
+});
 
 export default Register
