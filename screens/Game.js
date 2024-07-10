@@ -5,18 +5,34 @@ import Win from '../components/Win'
 import Gameover from '../components/Gameover'
 
 const Game = () => {
-
-  const [gameOver, setGameOver] = useState(false);
-  const [win, setWin] = useState(false);
-  const [guess, setGuess] = useState(true);
+  
   const [randomNumber, setRandomNumber] = useState(generateRandomNumber());
   const [attempts, setAttempts] = useState(4);
+  const [gameState, setGameState] = useState('active'); // 'active', 'check', 'win', 'over'
+
+  const restartGame = () => {
+    // Reset all state that manages game status
+    setGameState('active');
+  }
+
+  const handleCheck = () => {
+    setGameState('check');
+  }
+    
+  const handleWin = () => {
+    setGameState('win');
+  }
+
+  const handleGameOver = () => {
+    setGameState('over');
+  }
+
 
   function generateRandomNumber() {
     return Math.floor(Math.random() * 100) + 1;
   }
 
-  // this function is Try Agian. The Restart needs t
+  // this function is Try Agian. The Restart needs to back
   // Start page. 
   function reStart() {
     setRandomNumber(generateRandomNumber());
@@ -31,17 +47,13 @@ const Game = () => {
 
     <View>
       <View> 
-        
         <Button title='Restart' onPress={() => reStart()} />
       </View>
-
-      {guess && <GuessNum 
-        setNumber={randomNumber} 
-        assignedCount={attempts}
-      />}
-
-      {win && <Win />}
-      {gameOver && <Gameover />}
+      
+      {gameState === 'active' && <GuessNum onWin={handleWin} onGameOver={handleGameOver} />}
+      {gameState === 'check' && <CheckResult onWin={handleWin} onGameOver={handleGameOver} />}
+      {gameState === 'win' && <Win onRestart={restartGame} />}
+      {gameState === 'over' && <Gameover onRestart={restartGame} />}
     </View>
   );
 };
