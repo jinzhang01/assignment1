@@ -1,10 +1,15 @@
 import { View, Text, TextInput, Button } from 'react-native'; 
 import React, { useState, useEffect } from 'react';
 
-const GuessNum = () => {
+const GuessNum = ({setNumber, assignedCount}) => {
     const [guess, setGuess] = useState('')
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState(assignedCount)
     const [timer, setTimer] = useState(0)
+
+    useEffect(() => {
+        setCount(assignedCount);
+        setTimer(0);
+    }, [setNumber]);
 
     useEffect(() => {
         let interval;
@@ -36,9 +41,16 @@ const GuessNum = () => {
         }
     };
 
-    
+    function checkGuess() {
+        if (guess == setNumber) {
+            alert('You guessed correct!');
+            // Call the win component here
+        } 
+    }
+
 
   return (
+
     <View>
       <Text>Guess a Number Between 1 & 100</Text>
     <TextInput 
@@ -49,15 +61,16 @@ const GuessNum = () => {
         // valide the input to make sure it is a number
         onChangeText = {handleGuess}
     />
-    <Text>Attempts left: {4 - count}</Text>
+    <Text>Attempts left: {count}</Text>
     <Text>Timer: {timer} </Text>
 
-    <Button title="Use a Hint" onPress={() => alert('The number is between 1 and 100')} />
+    <Button title="Use a Hint" onPress={() => alert(setNumber)} />
     <Button title='Submit Guess' 
         onPress={() => {
             console.log("from submit");
-            setCount(count + 1);
+            setCount(count - 1);
             console.log(count);
+            checkGuess(guess);
         }} 
     />
     </View>
