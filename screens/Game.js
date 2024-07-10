@@ -16,6 +16,8 @@ const Game = () => {
     return Math.floor(Math.random() * 100) + 1;
   }
 
+  // this function is Try Agian. The Restart needs t
+  // Start page. 
   function reStart() {
     setRandomNumber(generateRandomNumber());
     setAttempts(4);
@@ -26,16 +28,17 @@ const Game = () => {
 
 
   return (
+
     <View>
       <View> 
+        
         <Button title='Restart' onPress={() => reStart()} />
       </View>
 
       {guess && <GuessNum 
         setNumber={randomNumber} 
         assignedCount={attempts}
-        
-        />}
+      />}
 
       {win && <Win />}
       {gameOver && <Gameover />}
