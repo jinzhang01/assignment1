@@ -1,10 +1,14 @@
 import { View, Text, Modal, StyleSheet, Button } from 'react-native';
 import React from 'react';
 
-const Confirm = ({ email, name, isModalVisible, onClose }) => {
+const Confirm = ({ email, name, isModalVisible, onClose, onGameButton}) => {
 
   function handleCloseModal() {
     onClose();
+  }
+
+  function handleGameButton() {
+    onGameButton();
   }
   
   return (
@@ -26,7 +30,7 @@ const Confirm = ({ email, name, isModalVisible, onClose }) => {
             </View>
       
             <View style={styles.button} >
-              <Button title="Continue" onPress={() => {console.log("continue pressed")}}/>
+              <Button title="Continue" onPress={onGameButton}/>
             </View>
           </View>
 

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Checkbox from 'expo-checkbox';
 import Confirm from '../screens/Confirm';
 
-const Register = () => {
+const Register = ({onGameButton}) => {
     const [text, setText] = useState('');
     const[isNameValidate, setNameValidate] = useState(false);
     const [email, setEmail] = useState('');
@@ -103,7 +103,7 @@ const Register = () => {
                 disabled={!isChecked}/>
             </View>
           </View>
-      <Confirm email={email} name={text} isModalVisible={modalVisible} onClose={handleCloseModal} />
+      <Confirm email={email} name={text} isModalVisible={modalVisible} onClose={handleCloseModal} onGameButton={onGameButton}/>
     </View>
   )
 }

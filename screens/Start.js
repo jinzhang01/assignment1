@@ -4,13 +4,13 @@ import Header from '../components/Header';
 import Register from '../components/Register';
 
 
-const Start = () => {
+const Start = ({onGame}) => {   
+
 
     return (
         <View>
             <Header />
-            <Register />
-
+            <Register onGameButton={onGame}/>
         </View>
     );
 };

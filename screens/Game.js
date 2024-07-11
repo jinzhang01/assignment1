@@ -5,7 +5,7 @@ import Win from '../components/Win'
 import Gameover from '../components/Gameover'
 import CheckResult from '../components/CheckResult'
 
-const Game = () => {
+const Game = ({onStart}) => {
   
   const [randomNumber, setRandomNumber] = useState(generateRandomNumber());
   const [attempts, setAttempts] = useState(4);
@@ -13,6 +13,10 @@ const Game = () => {
   const [result, setResult] = useState(''); // 'wrong', 'correct', 'overtime', 'overattempts'
 
   console.log(result);
+
+  const restartConfirm = () => {
+    onStart();
+  }
 
   const resumeGame = () => {
     // Reset all state that manages game status
@@ -56,9 +60,10 @@ const Game = () => {
 
     <View>
       <View> 
-        {/* need to back from the login page */}
-        <Button title='Restart'/>
+        <Button title='Restart' onPress={() => restartConfirm()} />
+        {/* <Button title='Restart' onPress={restartConfirm} /> */}
       </View>
+
       {gameState === 'active' && <GuessNum 
         onCheck={handleCheck} 
         setNumber={randomNumber} 
