@@ -1,7 +1,7 @@
 import { View, Text, Image, Button } from 'react-native'
 import React from 'react'
 
-const Win = () => {
+const Win = ({onRestart}) => {
   return (
     <View>
       <Text>You guessed correct!</Text>
@@ -11,7 +11,7 @@ const Win = () => {
         style={{ width: 100, height: 100 }} 
         alt="win" 
       />
-      <Button title='New Game' onPress={() =>console.log('New Game')} />  
+      <Button title='New Game' onPress={() =>onRestart()} />  
     </View>
   )
 }

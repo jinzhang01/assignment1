@@ -3,15 +3,15 @@ import React, { useState, useEffect } from 'react';
 
 
 
-const GuessNum = ({setNumber, assignedCount, onCheck, guessResult}) => {
+const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin}) => {
     const [guess, setGuess] = useState('')
-    const [count, setCount] = useState(assignedCount)
+    const [count, setCount] = useState(4)
     const [timer, setTimer] = useState(0)
 
-    useEffect(() => {
-        setCount(assignedCount);
-        setTimer(0);
-    }, [setNumber]);
+    // useEffect(() => {
+    //     setCount(assignedCount);
+    //     setTimer(0);
+    // }, [setNumber]);
 
     useEffect(() => {
         let interval;
@@ -44,16 +44,16 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult}) => {
         }
         console.log(guess);
         if (guess == setNumber) {
-            console.log('You guessed correct!');
+            onWin();
             guessResult('correct');
+
         } else {
-            setCount(count - 1);
             guessResult('wrong');
-            console.log(count); 
-            if (count == 1) {
-                console.log('You are out of attempts!');
+            onCheck()
+            console.log(assignedCount); 
+            if (assignedCount == 1) {
+                onOver();
                 guessResult('overattempts');
-                onCheck()
             }   
         }
     };
@@ -71,7 +71,7 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult}) => {
         // valide the input to make sure it is a number
         onChangeText = {text => setGuess(text)}
     />
-    <Text>Attempts left: {count}</Text>
+    <Text>Attempts left: {assignedCount}</Text>
     <Text>Timer: {timer} </Text>
 
     <Button title="Use a Hint" onPress={() => alert(setNumber)} />

@@ -16,6 +16,8 @@ const Game = () => {
 
   const resumeGame = () => {
     // Reset all state that manages game status
+    setAttempts(attempts - 1);
+
     setGameState('active');
   }
 
@@ -42,14 +44,11 @@ const Game = () => {
     return Math.floor(Math.random() * 100) + 1;
   }
 
-  // this function is Try Agian. The Restart needs to back
-  // Start page. 
+
   function reStart() {
     setRandomNumber(generateRandomNumber());
     setAttempts(4);
-    setGuess(true);
-    setGameOver(false);
-    setWin(false);
+    setGameState('active');
   }
 
 
@@ -57,20 +56,24 @@ const Game = () => {
 
     <View>
       <View> 
-        <Button title='Restart' onPress={() => reStart()} />
+        {/* need to back from the login page */}
+        <Button title='Restart'/>
       </View>
       {gameState === 'active' && <GuessNum 
         onCheck={handleCheck} 
         setNumber={randomNumber} 
-        assignedCount={attempts} 
-        guessResult={getGuess}/>}
+        assignedCount={attempts}
+        guessResult={getGuess}
+        onOver = {handleGameOver} 
+        onWin = {handleWin}
+        />}
 
       {gameState === 'check' && <CheckResult 
-        onRestart={resumeGame} 
+        resume={resumeGame} 
         onGameOver={handleGameOver} />}
 
-      {gameState === 'win' && <Win onRestart={resumeGame} />}
-      {gameState === 'over' && <Gameover />}
+      {gameState === 'win' && <Win onRestart={reStart} />}
+      {gameState === 'over' && <Gameover final={result}/>}
     </View>
   );
 };
