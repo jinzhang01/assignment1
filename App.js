@@ -5,7 +5,7 @@ import Start from './screens/Start';
 import Game from './screens/Game';
 
 export default function App() {
-  const [page, setPage] = useState('game'); // 'start', 'game'
+  const [page, setPage] = useState('start'); // 'start', 'game'
 
   const handleStart = () => {
     console.log('Switching to start screen');

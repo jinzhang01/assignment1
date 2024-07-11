@@ -6,9 +6,9 @@ import Confirm from '../screens/Confirm';
 
 const Register = ({onGameButton}) => {
     const [text, setText] = useState('');
-    const[isNameValidate, setNameValidate] = useState(false);
+    const[isNameValidate, setNameValidate] = useState(true);
     const [email, setEmail] = useState('');
-    const [isEmailValidate, setEmailValidate] = useState(false);
+    const [isEmailValidate, setEmailValidate] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -99,7 +99,14 @@ const Register = ({onGameButton}) => {
       
             <View style={styles.button}>
               <Button title="Start" 
-                onPress={() => handleConfirm()} 
+                
+                onPress={() => 
+                  {checkEmail();
+                    checkName();
+                    if(isNameValidate && isEmailValidate && isChecked && text && email){
+                      handleConfirm();
+                  }
+                  }} 
                 disabled={!isChecked}/>
             </View>
           </View>
