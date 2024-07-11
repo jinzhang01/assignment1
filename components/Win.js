@@ -1,6 +1,7 @@
 import { View, Text, Image, Button } from 'react-native'
 import React from 'react'
 
+// need to pass attempts as props
 const Win = ({onRestart}) => {
   return (
     <View>

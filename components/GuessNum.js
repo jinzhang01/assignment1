@@ -74,6 +74,8 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
     <Text>Attempts left: {assignedCount}</Text>
     <Text>Timer: {timer} </Text>
 
+
+    {/* make the hint become a range of numbers */}
     <Button title="Use a Hint" onPress={() => alert(setNumber)} />
     
     <Button title='Submit Guess' 

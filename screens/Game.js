@@ -21,7 +21,6 @@ const Game = ({onStart}) => {
   const resumeGame = () => {
     // Reset all state that manages game status
     setAttempts(attempts - 1);
-
     setGameState('active');
   }
 
@@ -36,6 +35,7 @@ const Game = ({onStart}) => {
   }
     
   const handleWin = () => {
+    // setAttempts(attempts - 1); // to show the correct attempts
     setGameState('win');
   }
 
