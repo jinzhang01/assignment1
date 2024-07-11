@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
-import { View, Text} from 'react-native';
+import { View, Text, Button} from 'react-native';
 
 
-const CheckResult = () => {
+const CheckResult = (onRestart, onGameOver) => {
 
     return (
         <View>
-            <Text>Check Result</Text>
+            <Text> You Did not guess correct! </Text>
+
+            <View>
+                <Button title='TRY AGAIN' onPress={() => console.log('Try Again')} />
+            </View>
+
+            <View>
+                <Button title='END THE GAME' onPress={() => console.log('Try Again')} />
+            </View>
         </View>
     );
 };

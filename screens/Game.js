@@ -3,19 +3,29 @@ import React, {useState} from 'react'
 import GuessNum from '../components/GuessNum'
 import Win from '../components/Win'
 import Gameover from '../components/Gameover'
+import CheckResult from '../components/CheckResult'
 
 const Game = () => {
   
   const [randomNumber, setRandomNumber] = useState(generateRandomNumber());
   const [attempts, setAttempts] = useState(4);
   const [gameState, setGameState] = useState('active'); // 'active', 'check', 'win', 'over'
+  const [result, setResult] = useState(''); // 'wrong', 'correct', 'overtime', 'overattempts'
 
-  const restartGame = () => {
+  console.log(result);
+
+  const resumeGame = () => {
     // Reset all state that manages game status
     setGameState('active');
   }
 
-  const handleCheck = () => {
+  // get the test result from GuessNum.js
+  const getGuess = (data) => {
+    setResult(data);
+  }
+
+
+  const handleCheck = (data) => {
     setGameState('check');
   }
     
@@ -49,11 +59,18 @@ const Game = () => {
       <View> 
         <Button title='Restart' onPress={() => reStart()} />
       </View>
-      
-      {gameState === 'active' && <GuessNum onWin={handleWin} onGameOver={handleGameOver} />}
-      {gameState === 'check' && <CheckResult onWin={handleWin} onGameOver={handleGameOver} />}
-      {gameState === 'win' && <Win onRestart={restartGame} />}
-      {gameState === 'over' && <Gameover onRestart={restartGame} />}
+      {gameState === 'active' && <GuessNum 
+        onCheck={handleCheck} 
+        setNumber={randomNumber} 
+        assignedCount={attempts} 
+        guessResult={getGuess}/>}
+
+      {gameState === 'check' && <CheckResult 
+        onRestart={resumeGame} 
+        onGameOver={handleGameOver} />}
+
+      {gameState === 'win' && <Win onRestart={resumeGame} />}
+      {gameState === 'over' && <Gameover />}
     </View>
   );
 };

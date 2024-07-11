@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 
 
-const GuessNum = ({setNumber, assignedCount}) => {
+const GuessNum = ({setNumber, assignedCount, onCheck, guessResult}) => {
     const [guess, setGuess] = useState('')
     const [count, setCount] = useState(assignedCount)
     const [timer, setTimer] = useState(0)
@@ -11,7 +11,6 @@ const GuessNum = ({setNumber, assignedCount}) => {
     useEffect(() => {
         setCount(assignedCount);
         setTimer(0);
-
     }, [setNumber]);
 
     useEffect(() => {
@@ -22,8 +21,8 @@ const GuessNum = ({setNumber, assignedCount}) => {
                 setTimer((prevTimer) => prevTimer + 1);
             }, 1000);
         } else {
-            alert('You are out of time!');
-            // Call the game over component here
+            console.log('You are out of time!');
+            guessResult('overtime')
         }
         return () => clearInterval(interval);
     }, [timer]);
@@ -43,18 +42,21 @@ const GuessNum = ({setNumber, assignedCount}) => {
         if (validateInput(userGuess)) {
             setGuess(userGuess); 
         }
+        console.log(guess);
         if (guess == setNumber) {
-            alert('You guessed correct!');
-            // Call the win component here
-        } 
-    };
-
-    function handleAttempts() {
-        if (count === 0) {
-            alert('You are out of attempts!');
-            // Call the game over component here
+            console.log('You guessed correct!');
+            guessResult('correct');
+        } else {
+            setCount(count - 1);
+            guessResult('wrong');
+            console.log(count); 
+            if (count == 1) {
+                console.log('You are out of attempts!');
+                guessResult('overattempts');
+                onCheck()
+            }   
         }
-    }
+    };
 
 
   return (
@@ -77,9 +79,6 @@ const GuessNum = ({setNumber, assignedCount}) => {
     <Button title='Submit Guess' 
         onPress={() => {
             if (validateInput(guess)) { 
-                console.log("from submit");
-                setCount(count - 1);
-                console.log(count);
                 handleGuess(guess);
             }
         }} 
