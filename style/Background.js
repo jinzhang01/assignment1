@@ -7,7 +7,7 @@ import colors from './colors';
 const Background = ({children}) => {
   return (
     <LinearGradient
-        colors={[colors.backgroundLight, colors.backgroundDark]}
+        colors={[colors.backgroundLightBlue, colors.backgroundDarkBlue]}
         style={styles.container}
     >
         {children}
@@ -18,7 +18,6 @@ const Background = ({children}) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'red'
     },
   });
 
