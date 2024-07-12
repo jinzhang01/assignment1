@@ -14,11 +14,10 @@ const Confirm = ({ email, name, isModalVisible, onClose, onGameButton}) => {
   }
   
   return (
-
     <Modal visible={isModalVisible} animationType="slide" transparent={true}>
       <LinearGradient
-          // Define the gradient colors here, from solid to transparent
-          colors={['rgba(0, 123, 255, 1)', 'rgba(0, 123, 255, 0)']}
+          // Define the gradient from solid to transparent
+          colors={['rgba(224, 247, 250, 1)', 'rgba(30, 58, 95, 0.75)']}
           style={styles.modelBackgroud}
         >
         <View style={styles.modelBackgroud}>
@@ -64,6 +63,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     width: '80%', 
     padding: 20,
+    paddingVertical: 40,
     backgroundColor: colors.cardBackground,
     justifyContent: 'center',
     borderRadius: 10, 
