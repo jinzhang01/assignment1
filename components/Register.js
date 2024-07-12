@@ -49,8 +49,7 @@ const Register = ({onGameButton}) => {
       setModalVisible(false);
     };
 
-
-  console.log("Rendering Register", { text, email, isChecked, modalVisible });
+  // console.log("Rendering Register", { text, email, isChecked, modalVisible });
   
   return (
     <SafeAreaView style={styles.safeArea}> 
@@ -66,7 +65,10 @@ const Register = ({onGameButton}) => {
           <TextInput style={styles.textInput}  
             placeholder="Enter your name"
             value={text} 
-            onChangeText = {userInputs => setText(userInputs)}
+            onChangeText = {userInputs => {
+              setText(userInputs);  
+            }}
+            
             onBlur={checkName}
           />
           {isNameValidate ?  null : <Text style={styles.textStyle}>  Please enter a valid name </Text>}
@@ -74,12 +76,13 @@ const Register = ({onGameButton}) => {
           
           <Text style={styles.subtitle}> Email Address</Text>
           <TextInput style={styles.textInput} 
-          placeholder="Enter your email address"
-          value={email}
-          onChangeText = {userEmail => setEmail(userEmail)}
-          onBlur={checkEmail}
+            placeholder="Enter your email address"
+            value={email}
+            onChangeText = {userEmail => setEmail(userEmail)}
+            onBlur={checkEmail}
           />
-          {isEmailValidate ? null : <Text style={styles.textStyle}>  Please enter a valid email address </Text>}
+            {isEmailValidate ? null : <Text style={styles.textStyle}>  Please enter a valid email address </Text>}
+
 
           <View style={styles.CheckboxContainer}>
               <Checkbox  
