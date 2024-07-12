@@ -31,14 +31,15 @@ const Register = ({onGameButton}) => {
     }
 
     const checkEmail = () => {
-        // Check if email is valid
-        if (email.includes('@') && email.includes('.')) {
-            setEmailValidate(true);
-        } else {
-            setEmailValidate(false);
-        }
-        console.log(isEmailValidate);
-    }
+      // Regular expression for validating an email address
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailRegex.test(email)) {
+          setEmailValidate(true);
+      } else {
+          setEmailValidate(false);
+      }
+      console.log(isEmailValidate);
+  }
 
     const handleConfirm = () => {
       setModalVisible(true);
