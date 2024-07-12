@@ -93,7 +93,9 @@ const Game = ({onStart}) => {
               finalAttempts={attempts}
               winNum={winNum} 
             />}
-            {gameState === 'over' && <Gameover final={result}/>}
+            {gameState === 'over' && <Gameover final={result}
+              onRestart={reStart}
+              />}
           </View>
         </View>
       </SafeAreaView>

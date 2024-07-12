@@ -50,6 +50,24 @@ const Register = ({onGameButton}) => {
       setModalVisible(false);
     };
 
+    async function onPressHandler() {
+      // reference: inspired by copilot, original face a bug 
+      // the user can still bypass the email checking in certain cases
+      // Directly validate email and name without relying on asynchronous state updates
+      const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      const nameIsValid = text.length > 1 && isNaN(text);
+
+      // Update the validation states accordingly
+      setEmailValidate(emailIsValid);
+      setNameValidate(nameIsValid);
+
+      // Only proceed if both validations pass, the checkbox is checked, and both fields are not empty
+      if (nameIsValid && emailIsValid && isChecked && text && email) {
+        handleConfirm();
+        }
+      }
+    
+
   // console.log("Rendering Register", { text, email, isChecked, modalVisible });
   
   return (
@@ -108,13 +126,7 @@ const Register = ({onGameButton}) => {
                 <Button 
                   style={styles.buttonText}
                   title="Start" 
-                  onPress={() => 
-                    {checkEmail();
-                      checkName();
-                      if(isNameValidate && isEmailValidate && isChecked && text && email){
-                        handleConfirm();
-                    }
-                    }} 
+                  onPress={onPressHandler} 
                   disabled={!isChecked}/>
               </View>
             </View>
