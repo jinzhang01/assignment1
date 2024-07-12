@@ -13,6 +13,7 @@ const Game = ({onStart}) => {
   const [attempts, setAttempts] = useState(4);
   const [gameState, setGameState] = useState('active'); // 'active', 'check', 'win', 'over'
   const [result, setResult] = useState(''); // 'wrong', 'correct', 'overtime', 'overattempts'
+  const [winNum, setWinNum] = useState("");
 
   console.log(result);
 
@@ -57,6 +58,11 @@ const Game = ({onStart}) => {
     setGameState('active');
   }
 
+  function handleWinNum(data) {
+    console.log("the win num is received", data);
+    setWinNum(data);
+  }
+
 
   return (
     <Background>
@@ -76,13 +82,17 @@ const Game = ({onStart}) => {
               guessResult={getGuess}
               onOver = {handleGameOver} 
               onWin = {handleWin}
+              onWinNum = {handleWinNum}
               />}
 
             {gameState === 'check' && <CheckResult 
               resume={resumeGame} 
               onGameOver={handleGameOver} />}
 
-            {gameState === 'win' && <Win onRestart={reStart} finalAttempts={attempts} />}
+            {gameState === 'win' && <Win onRestart={reStart} 
+              finalAttempts={attempts}
+              winNum={winNum} 
+            />}
             {gameState === 'over' && <Gameover final={result}/>}
           </View>
         </View>

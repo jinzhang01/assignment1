@@ -3,15 +3,16 @@ import React from 'react'
 import colors from '../style/colors'
 
 // need to pass attempts as props
-const Win = ({onRestart, finalAttempts}) => {
+const Win = ({onRestart, finalAttempts, winNum}) => {
+  console.log("win num received in win", winNum);
   return (
     <View style={styles.container}>
       <Text style={styles.subtitle}>You guessed correct!</Text>
-      <Text style={styles.subtitle}>Attempts used: {finalAttempts}</Text>
+      <Text style={styles.subtitle}>Attempts used: {4 - finalAttempts}</Text>
 
       
       <Image 
-        source={{ uri: "https://picsum.photos/id/14/100/100" }} 
+        source={{ uri: `https://picsum.photos/id/${winNum}/100/100` }} 
         style={styles.imageStyle} 
         alt="win" 
       />

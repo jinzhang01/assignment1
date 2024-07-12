@@ -1,16 +1,11 @@
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native'; 
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native'; 
 import React, { useState, useEffect } from 'react';
 import colors from '../style/colors';
 
-const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin}) => {
+const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin, onWinNum}) => {
     const [guess, setGuess] = useState('')
     const [count, setCount] = useState(4)
     const [timer, setTimer] = useState(0)
-
-    // useEffect(() => {
-    //     setCount(assignedCount);
-    //     setTimer(0);
-    // }, [setNumber]);
 
     useEffect(() => {
         let interval;
@@ -30,7 +25,7 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
 
     const validateInput = (userGuess) => {
         const num = parseInt(userGuess, 10);
-        if (isNaN(num) || num < 0 || num > 100) {
+        if (isNaN(num) || num < 1 || num > 100) {
             alert('Please enter a valid number between 1 and 100');
             return false;
         } else {
@@ -45,6 +40,7 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
         console.log(guess);
         if (guess == setNumber) {
             onWin();
+            onWinNum(guess);
             guessResult('correct');
 
         } else {
@@ -58,9 +54,22 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
         }
     };
 
+    function generateHint() {
+        console.log("(Production propose) The correct answer is:", setNumber);
+        // make the hint become a range of numbers
+        const lowerBound = Math.floor((setNumber - 5) / 10) * 10;
+        const upperBound = Math.ceil((setNumber + 5) / 10) * 10;
+        Alert.alert(
+            'Hint',
+            `The number is between ${lowerBound} and ${upperBound}`,
+            [
+              { text: 'OK'}
+            ],
+            { cancelable: false }
+        );
+    }
 
   return (
-
     <View>
       <Text style={styles.subtitle}>Guess a Number Between 1 & 100</Text>
     <TextInput style={styles.textInput}
@@ -69,14 +78,17 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
         keyboardType='numeric'
         // valide the input to make sure it is a number
         onChangeText = {text => setGuess(text)}
+        onBlur={() => {validateInput(guess)}}
     />
+ 
     <Text style={styles.textStyle}>Attempts left: {assignedCount}</Text>
     <Text style={styles.textStyle}>Timer: {timer} </Text>
 
 
     {/* make the hint become a range of numbers */}
     <View style={styles.buttonStyle}>
-        <Button title="Use a Hint" onPress={() => alert(setNumber)} />
+        
+        <Button title="Use a Hint" onPress={() => generateHint()} />
     </View>
 
     <View style={styles.buttonStyle}>
