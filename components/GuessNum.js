@@ -84,7 +84,6 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
     <Text style={styles.textStyle}>Attempts left: {assignedCount}</Text>
     <Text style={styles.textStyle}>Timer: {timer} </Text>
 
-
     {/* make the hint become a range of numbers */}
     <View style={styles.buttonStyle}>
         
