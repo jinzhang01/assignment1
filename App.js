@@ -18,6 +18,7 @@ export default function App() {
   }
 
   return (
+    
     <View style={styles.container}>
       {page === 'start' && <Start onGame={handleGame}/>}
       {page === 'game' && <Game onStart={handleStart}/>}
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    // alignItems: 'center',
     justifyContent: 'center',
   },
 });
