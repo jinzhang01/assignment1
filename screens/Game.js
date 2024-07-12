@@ -37,7 +37,7 @@ const Game = ({onStart}) => {
   }
     
   const handleWin = () => {
-    // setAttempts(attempts - 1); // to show the correct attempts
+    setAttempts(attempts - 1); // to show the correct attempts
     setGameState('win');
   }
 
@@ -82,7 +82,7 @@ const Game = ({onStart}) => {
               resume={resumeGame} 
               onGameOver={handleGameOver} />}
 
-            {gameState === 'win' && <Win onRestart={reStart} />}
+            {gameState === 'win' && <Win onRestart={reStart} finalAttempts={attempts} />}
             {gameState === 'over' && <Gameover final={result}/>}
           </View>
         </View>

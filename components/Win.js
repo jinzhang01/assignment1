@@ -3,11 +3,11 @@ import React from 'react'
 import colors from '../style/colors'
 
 // need to pass attempts as props
-const Win = ({onRestart}) => {
+const Win = ({onRestart, finalAttempts}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.subtitle}>You guessed correct!</Text>
-      <Text style={styles.subtitle}>Attempts used: {}</Text>
+      <Text style={styles.subtitle}>Attempts used: {finalAttempts}</Text>
 
       
       <Image 

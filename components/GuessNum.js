@@ -14,7 +14,6 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
 
     useEffect(() => {
         let interval;
-        // need to change back to 60
         if (timer < 60) {
             interval = setInterval(() => {
                 setTimer((prevTimer) => prevTimer + 1);
@@ -22,6 +21,7 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
         } else {
             // call the function to end the game
             console.log('You are out of time!');
+            onOver();
             guessResult('overtime')
         }
         return () => clearInterval(interval);

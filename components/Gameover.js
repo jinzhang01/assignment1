@@ -1,21 +1,54 @@
-import { View, Text, Image} from 'react-native'
+import { View, Text, Image, StyleSheet} from 'react-native'
 import React from 'react'
+import colors from '../style/colors'
 
 
 
 const Gameover = ({final}) => {
 
   return (
-    <View>
-      <Text>The Game is Over!</Text>
+    <View style={styles.container}>
+      <Text style={styles.subtitle}>The Game is Over!</Text>
         <Image 
             source={require('../res/sadface.jpg')} 
-            style={{ width: 100, height: 100 }} 
+            style={styles.imageStyle} 
         />
-        {final == 'overtime' ? <Text> You are out of time! </Text> : ""}
-        {final == 'overattempts' ? <Text> You are out of attempts! </Text> : ""}
+        {final == 'overtime' ? <Text style={styles.subtitle}> You are out of time! </Text> : ""}
+        {final == 'overattempts' ? <Text style={styles.subtitle}> You are out of attempts! </Text> : ""}
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  subtitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: colors.primary,
+    marginTop: 10,
+    marginBottom: 20,
+    textAlign: 'left',
+
+  },
+
+  imageStyle: {
+    width: 100,
+    height: 100,
+    margin: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  
+  buttonStyle: {
+    backgroundColor: colors.buttonContinue,
+    borderRadius: 5,
+    margin: 5,
+    fontcolor: colors.buttonText,
+  },
+});
 
 export default Gameover
