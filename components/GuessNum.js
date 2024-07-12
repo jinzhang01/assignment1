@@ -75,7 +75,7 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
     <TextInput style={styles.textInput}
         placeholder='Enter your guess'
         value={guess}
-        keyboardType='numeric'
+        // keyboardType='numeric'
         // valide the input to make sure it is a number
         onChangeText = {text => setGuess(text)}
         onBlur={() => {validateInput(guess)}}
