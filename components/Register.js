@@ -32,6 +32,7 @@ const Register = ({onGameButton}) => {
 
     const checkEmail = () => {
       // Regular expression for validating an email address
+      // reference: https://www.w3resource.com/javascript/form/email-validation.php
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (emailRegex.test(email)) {
           setEmailValidate(true);
@@ -58,9 +59,6 @@ const Register = ({onGameButton}) => {
       </View>
 
       <View style={styles.container}>
-          {/* could add a touched state to check if the user has touched the input field */}
-    
-
           <Text style={styles.subtitle}> Name </Text>
           <TextInput style={styles.textInput}  
             placeholder="Enter your name"
@@ -81,7 +79,7 @@ const Register = ({onGameButton}) => {
             onChangeText = {userEmail => setEmail(userEmail)}
             onBlur={checkEmail}
           />
-            {isEmailValidate ? null : <Text style={styles.textStyle}>  Please enter a valid email address </Text>}
+         {isEmailValidate ? null : <Text style={styles.textStyle}>  Please enter a valid email address </Text>}
 
 
           <View style={styles.CheckboxContainer}>
