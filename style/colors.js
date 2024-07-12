@@ -12,8 +12,9 @@ const colors = {
   buttonText: '#ffffff', // White text for buttons
   // lightpink for the card background
   cardBackground: '#FAD2CF',
-  lightwhite: '#F0F0F0',
-  black: '#000000',
+  light: '#87CEEB',
+  dark: '#E0FFFF',
+  gary: '#696969',
 };
   
   export default colors;

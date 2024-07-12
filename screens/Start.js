@@ -4,8 +4,8 @@ import Register from '../components/Register';
 import Background from '../style/Background';
 
 // by default flex direction is row 
-// justifyContent: 'center' -> X Axies 
-//  alignItems: 'center' -> Y Axies
+// justifyContent: 'center' -> X Axies   (horizontal axis).
+//  alignItems: 'center' -> Y Axies (vertical axis).
 
 const Start = ({onGame}) => {   
 

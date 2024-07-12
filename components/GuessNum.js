@@ -1,7 +1,6 @@
-import { View, Text, TextInput, Button } from 'react-native'; 
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native'; 
 import React, { useState, useEffect } from 'react';
-
-
+import colors from '../style/colors';
 
 const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin}) => {
     const [guess, setGuess] = useState('')
@@ -62,31 +61,68 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
   return (
 
     <View>
-      <Text>Guess a Number Between 1 & 100</Text>
-    <TextInput 
+      <Text style={styles.subtitle}>Guess a Number Between 1 & 100</Text>
+    <TextInput style={styles.textInput}
         placeholder='Enter your guess'
         value={guess}
         keyboardType='numeric'
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
         // valide the input to make sure it is a number
         onChangeText = {text => setGuess(text)}
     />
-    <Text>Attempts left: {assignedCount}</Text>
-    <Text>Timer: {timer} </Text>
+    <Text style={styles.textStyle}>Attempts left: {assignedCount}</Text>
+    <Text style={styles.textStyle}>Timer: {timer} </Text>
 
 
     {/* make the hint become a range of numbers */}
-    <Button title="Use a Hint" onPress={() => alert(setNumber)} />
-    
-    <Button title='Submit Guess' 
-        onPress={() => {
-            if (validateInput(guess)) { 
-                handleGuess(guess);
-            }
-        }} 
-    />
+    <View style={styles.buttonStyle}>
+        <Button title="Use a Hint" onPress={() => alert(setNumber)} />
+    </View>
+
+    <View style={styles.buttonStyle}>
+        <Button title='Submit Guess' 
+            onPress={() => {
+                if (validateInput(guess)) { 
+                    handleGuess(guess);
+                }
+            }} 
+        />
+    </View>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+    subtitle: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: colors.primary,
+      marginTop: 10,
+      marginBottom: 20,
+      textAlign: 'left',
+
+    },
+    textInput: {
+      height: 40, 
+      borderColor: colors.primary, 
+      borderBottomWidth: 1,
+      marginBottom: 30,
+    },
+
+    textStyle: { 
+      fontSize: 14, 
+      color: colors.gary, 
+      textAlign: 'center',
+      marginVertical: 5,
+    },
+    
+    buttonStyle: {
+      backgroundColor: colors.buttonContinue,
+      borderRadius: 5,
+      margin: 5,
+      fontcolor: colors.buttonText,
+    },
+
+  
+  });
 
 export default GuessNum

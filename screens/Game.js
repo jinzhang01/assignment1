@@ -1,9 +1,11 @@
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, StyleSheet, SafeAreaView} from 'react-native'
 import React, {useState} from 'react'
 import GuessNum from '../components/GuessNum'
 import Win from '../components/Win'
 import Gameover from '../components/Gameover'
 import CheckResult from '../components/CheckResult'
+import Background from '../style/Background'
+import colors from '../style/colors'
 
 const Game = ({onStart}) => {
   
@@ -57,30 +59,69 @@ const Game = ({onStart}) => {
 
 
   return (
+    <Background>
+      <SafeAreaView style={styles.safeArea}> 
 
-    <View>
-      <View> 
-        <Button title='Restart' onPress={() => restartConfirm()} />
-        {/* <Button title='Restart' onPress={restartConfirm} /> */}
-      </View>
+        <View style={styles.topContainer}>
+            <View style={styles.restartButton}> 
+              <Button title='Restart' onPress={() => restartConfirm()} />
+              {/* <Button title='Restart' onPress={restartConfirm} /> */}
+        </View>
 
-      {gameState === 'active' && <GuessNum 
-        onCheck={handleCheck} 
-        setNumber={randomNumber} 
-        assignedCount={attempts}
-        guessResult={getGuess}
-        onOver = {handleGameOver} 
-        onWin = {handleWin}
-        />}
+          <View style={styles.container}>
+            {gameState === 'active' && <GuessNum 
+              onCheck={handleCheck} 
+              setNumber={randomNumber} 
+              assignedCount={attempts}
+              guessResult={getGuess}
+              onOver = {handleGameOver} 
+              onWin = {handleWin}
+              />}
 
-      {gameState === 'check' && <CheckResult 
-        resume={resumeGame} 
-        onGameOver={handleGameOver} />}
+            {gameState === 'check' && <CheckResult 
+              resume={resumeGame} 
+              onGameOver={handleGameOver} />}
 
-      {gameState === 'win' && <Win onRestart={reStart} />}
-      {gameState === 'over' && <Gameover final={result}/>}
-    </View>
+            {gameState === 'win' && <Win onRestart={reStart} />}
+            {gameState === 'over' && <Gameover final={result}/>}
+          </View>
+        </View>
+      </SafeAreaView>
+    </Background>
   );
 };
 
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  topContainer: {
+    width: '100%',
+    alignItems: 'flex-end',
+    padding: 8,
+  },
+  restartButton: {
+    backgroundColor: colors.light,
+    borderRadius: 5,
+    padding: 10,
+    marginBottom:10,
+  },
+
+  container: {
+    width: '100%',
+    padding: 20,
+    backgroundColor: colors.cardBackground,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    shadowColor: colors.secondary,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+});
 export default Game;
