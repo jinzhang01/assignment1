@@ -20,6 +20,7 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
                 setTimer((prevTimer) => prevTimer + 1);
             }, 1000);
         } else {
+            // call the function to end the game
             console.log('You are out of time!');
             guessResult('overtime')
         }
@@ -121,8 +122,6 @@ const styles = StyleSheet.create({
       margin: 5,
       fontcolor: colors.buttonText,
     },
-
-  
   });
 
 export default GuessNum
