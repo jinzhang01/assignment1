@@ -57,8 +57,8 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
     function generateHint() {
         console.log("(Production propose) The correct answer is:", setNumber);
         // make the hint become a range of numbers
-        const lowerBound = Math.floor((setNumber - 5) / 10) * 10;
-        const upperBound = Math.ceil((setNumber + 5) / 10) * 10;
+        const lowerBound = Math.max(0, Math.floor((setNumber - 5) / 10) * 10);
+        const upperBound = Math.min(100, Math.ceil((setNumber + 5) / 10) * 10);
         Alert.alert(
             'Hint',
             `The number is between ${lowerBound} and ${upperBound}`,

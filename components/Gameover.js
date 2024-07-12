@@ -1,12 +1,13 @@
-import { View, Text, Image, StyleSheet} from 'react-native'
+import { View, Text, Image, StyleSheet, Button} from 'react-native'
 import React from 'react'
 import colors from '../style/colors'
 
 
 
-const Gameover = ({final}) => {
+const Gameover = ({final, onRestart}) => {
 
   return (
+    <View> 
     <View style={styles.container}>
       <Text style={styles.subtitle}>The Game is Over!</Text>
         <Image 
@@ -16,6 +17,12 @@ const Gameover = ({final}) => {
         {final == 'overtime' ? <Text style={styles.subtitle}> You are out of time! </Text> : ""}
         {final == 'overattempts' ? <Text style={styles.subtitle}> You are out of attempts! </Text> : ""}
     </View>
+
+    <View style={styles.buttonStyle}>
+      <Button title='New Game' onPress={() =>onRestart()} />  
+    </View>
+ </View>
+    
   )
 }
 
