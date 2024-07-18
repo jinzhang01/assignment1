@@ -9,7 +9,6 @@ const Win = ({onRestart, finalAttempts, winNum}) => {
     <View style={styles.container}>
       <Text style={styles.subtitle}>You guessed correct!</Text>
       <Text style={styles.subtitle}>Attempts used: {4 - finalAttempts}</Text>
-
       
       <Image 
         source={{ uri: `https://picsum.photos/id/${winNum}/100/100` }} 

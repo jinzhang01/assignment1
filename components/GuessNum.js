@@ -75,7 +75,7 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
     <TextInput style={styles.textInput}
         placeholder='Enter your guess'
         value={guess}
-        keyboardType='numeric'
+        // keyboardType='numeric'
         // valide the input to make sure it is a number
         onChangeText = {text => setGuess(text)}
         onBlur={() => {validateInput(guess)}}
@@ -83,7 +83,6 @@ const GuessNum = ({setNumber, assignedCount, onCheck, guessResult, onOver, onWin
  
     <Text style={styles.textStyle}>Attempts left: {assignedCount}</Text>
     <Text style={styles.textStyle}>Timer: {timer} </Text>
-
 
     {/* make the hint become a range of numbers */}
     <View style={styles.buttonStyle}>
